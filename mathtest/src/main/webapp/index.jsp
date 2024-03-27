@@ -1,0 +1,26 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ page import="java.util.concurrent.ThreadLocalRandom" %>
+<%@ page import="mathtest.Question" %>
+<%@ page import="mathtest.StoreData" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<%
+    Question q = new Question(); //a + "+" + b + "=", "" + a + b);
+    StoreData store = new StoreData();
+    store.saveAllToDb(q);
+%>
+
+<form action='check' method='post'>
+<input type='hidden' name='questionId' value='<%=q.getId()%>'>
+How many is <%=q.getContent()%> ? <input type='number' name='answer'>?
+<input type='submit' value='check'>
+</form>
+</body>
+</html>
