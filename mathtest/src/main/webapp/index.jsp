@@ -7,12 +7,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<style><%@include file="/WEB-INF/css/style.css"%></style>
 <title>Insert title here</title>
 </head>
 <body>
 
 <%
-    Question q = new Question(); //a + "+" + b + "=", "" + a + b);
+    Question q = new Question();
     StoreData store = new StoreData();
     store.saveAllToDb(q);
 %>
