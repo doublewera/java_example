@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.concurrent.ThreadLocalRandom" %>
 <%@ page import="mathtest.Question" %>
-<%@ page import="mathtest.StoreData" %>
+<%@ page import="mathtest.DBsrc" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,7 +14,8 @@
 
 <%
     Question q = new Question();
-    StoreData store = new StoreData();
+    //StoreData store = new StoreData();
+    DBsrc store = new DBsrc();
     store.saveToTbl(q);
     
    

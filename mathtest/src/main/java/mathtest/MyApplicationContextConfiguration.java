@@ -11,8 +11,10 @@ public class MyApplicationContextConfiguration {
 
     @Bean
     @Scope("singleton")
-    public StoreData dataSource() {
-    	StoreData dataSource = new StoreData();
+    public DBsrc dataSource() {
+    //public StoreData dataSource() {
+    	//StoreData dataSource = new StoreData();
+    	DBsrc dataSource = new DBsrc();
         return dataSource;
     }
 }

@@ -7,10 +7,9 @@
             
         <property name="hbm2ddl.auto">update</property>    
         <property name="connection.url">jdbc:postgresql://localhost:5432/academy_top</property>    
-        <property name="connection.username">tutor</property>    
-        <property name="connection.password">PAROL!!!UUU</property>    
         <property name="connection.driver_class">org.postgresql.Driver</property>   
-       
+        <property name="connection.username">tutor</property>    
+
         <mapping class="mathtest.MathResult"/>   
         <mapping class="mathtest.Question"/>  
     </session-factory>  

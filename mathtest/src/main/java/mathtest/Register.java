@@ -41,7 +41,7 @@ public class Register extends HttpServlet {
 				"",
 				request.getParameter("pss")
 		);
-		StoreData store = new StoreData();
+		DBsrc store = new DBsrc();
 		store.saveToTbl(u);
 		PrintWriter writer = response.getWriter();
 		writer.close();

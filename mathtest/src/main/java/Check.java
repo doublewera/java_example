@@ -5,7 +5,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import mathtest.StoreData;
+//import mathtest.StoreData;
+import mathtest.DBsrc;
 import mathtest.Question;
 
 /**
@@ -27,7 +28,8 @@ public class Check extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		StoreData store = new StoreData();
+		//StoreData store = new StoreData();
+		DBsrc store = new DBsrc();
 		String user_answer = request.getParameter("answer");
 		Question q = store.getQuestion(
 				Integer.parseInt(request.getParameter("questionId")));
