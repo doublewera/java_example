@@ -14,11 +14,9 @@ import org.hibernate.boot.Metadata;
 import org.hibernate.boot.MetadataSources;  
 import org.hibernate.boot.registry.StandardServiceRegistry;  
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;  
 
 public class DBsrc {
 	private Properties prop = new Properties();
-	//private Configuration cfg = new Configuration();
 	private StandardServiceRegistry ssr;
 	private Metadata meta;
     
@@ -30,7 +28,6 @@ public class DBsrc {
 			pss = "";
 		}
 		prop.setProperty("hibernate.connection.password", pss);
-		//cfg.setProperties(prop);
 		ssr = new StandardServiceRegistryBuilder(
 				).configure("hibernate.cfg.xml").applySettings(prop).build();
 		meta = new MetadataSources(ssr).getMetadataBuilder().build();
