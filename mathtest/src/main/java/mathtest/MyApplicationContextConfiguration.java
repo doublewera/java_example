@@ -2,6 +2,9 @@ package mathtest;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ComponentScan;
+
+import java.nio.file.Paths;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Scope;
 
@@ -12,9 +15,11 @@ public class MyApplicationContextConfiguration {
     @Bean
     @Scope("singleton")
     public DBsrc dataSource() {
-    //public StoreData dataSource() {
-    	//StoreData dataSource = new StoreData();
-    	DBsrc dataSource = new DBsrc();
+    	DBsrc dataSource = new DBsrc(
+    			"hibernate.cfg.xml",
+    			Paths.get(System.getenv("APPDATA"),
+				    "postgresql",
+				    "pgpass.conf"));
         return dataSource;
     }
 }

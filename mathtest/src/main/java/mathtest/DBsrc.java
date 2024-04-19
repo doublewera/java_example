@@ -3,7 +3,6 @@ package mathtest;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Properties;
 import java.util.Scanner;
 
@@ -22,8 +21,14 @@ public class DBsrc {
 	private Properties prop = new Properties();
 	private StandardServiceRegistry ssr;
 	private Metadata meta;
+	private static Path filePath;
+	private SessionFactory factory;
+	private Session session;
+	
     
-	public DBsrc() {
+	public DBsrc(String cfg_path, Path pgpass_path) {
+		// Join standard path for pgpass in our systemfilePath = Paths.get(
+		filePath = pgpass_path;
 		String pss;
 		consolelog.error("\n\n\n\nWriting to console.");
 		try {
@@ -35,16 +40,13 @@ public class DBsrc {
 		}
 		prop.setProperty("hibernate.connection.password", pss);
 		ssr = new StandardServiceRegistryBuilder(
-				).configure("hibernate.cfg.xml").applySettings(prop).build();
+				).configure(cfg_path).applySettings(prop).build();
 		meta = new MetadataSources(ssr).getMetadataBuilder().build();
+		factory = meta.getSessionFactoryBuilder().build();
+    	
 	}
 	
 	private static String readPgpass(String dbname, String username) throws IOException {
-    	// Join standard path for pgpass in our system
-    	Path filePath = Paths.get(
-    			System.getenv("APPDATA"),
-    			"postgresql",
-    			"pgpass.conf");
     	// Open file
     	String pss = "";
     	String line = "";
@@ -67,20 +69,16 @@ public class DBsrc {
     }
 	
     public void saveToTbl(Object myo) {
-    	SessionFactory factory = meta.getSessionFactoryBuilder().build();
-    	Session session = factory.openSession();
+    	session = factory.openSession();
     	Transaction t = session.beginTransaction();   
     	session.persist(myo);
         t.commit();
-        factory.close();  
         session.close();
     }
     
     public Object findIt(Class mycls, int id) {
-    	SessionFactory factory = meta.getSessionFactoryBuilder().build();
-    	Session session = factory.openSession();  
+    	session = factory.openSession();  
     	Object result = session.get(mycls, id);
-        factory.close();  
         session.close();
         return result;
     }

@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.concurrent.ThreadLocalRandom" %>
+<%@ page import="org.springframework.context.ApplicationContext" %>
+<%@ page import="org.springframework.context.annotation.AnnotationConfigApplicationContext" %>
+<%@ page import="mathtest.MyApplicationContextConfiguration" %>
 <%@ page import="mathtest.Question" %>
 <%@ page import="mathtest.DBsrc" %>
 <!DOCTYPE html>
@@ -13,9 +16,10 @@
 <body>
 
 <%
+    ApplicationContext ctx = new AnnotationConfigApplicationContext(
+    		MyApplicationContextConfiguration.class);
+    DBsrc store = ctx.getBean(DBsrc.class);
     Question q = new Question();
-    //StoreData store = new StoreData();
-    DBsrc store = new DBsrc();
     store.saveToTbl(q);
     
    

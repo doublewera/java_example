@@ -5,8 +5,11 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-//import mathtest.StoreData;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
 import mathtest.DBsrc;
+import mathtest.MyApplicationContextConfiguration;
 import mathtest.Question;
 
 /**
@@ -28,8 +31,9 @@ public class Check extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//StoreData store = new StoreData();
-		DBsrc store = new DBsrc();
+		ApplicationContext ctx = new AnnotationConfigApplicationContext(
+	    		MyApplicationContextConfiguration.class);
+	    DBsrc store = ctx.getBean(DBsrc.class);
 		String user_answer = request.getParameter("answer");
 		Question q = store.getQuestion(
 				Integer.parseInt(request.getParameter("questionId")));

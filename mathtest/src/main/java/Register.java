@@ -1,12 +1,17 @@
-package mathtest;
-
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import mathtest.MyApplicationContextConfiguration;
+import mathtest.DBsrc;
+import mathtest.User;
+
 import java.io.IOException;
 import java.io.PrintWriter;
+
 
 /**
  * Servlet implementation class Register
@@ -40,7 +45,9 @@ public class Register extends HttpServlet {
 				"",
 				request.getParameter("pss")
 		);
-		DBsrc store = new DBsrc();
+		ApplicationContext ctx = new AnnotationConfigApplicationContext(
+	    		MyApplicationContextConfiguration.class);
+	    DBsrc store = ctx.getBean(DBsrc.class);
 		store.saveToTbl(u);
 		PrintWriter writer = response.getWriter();
 		writer.close();
